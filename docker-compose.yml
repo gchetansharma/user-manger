@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  mongodb:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+  user-manger:
+    image: user-manger:latest
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - spring.data.mongodb.host=mongodb
+      - spring.security.user.name=admin
+      - spring.security.user.password=password123
+    depends_on:
+      - mongodb
